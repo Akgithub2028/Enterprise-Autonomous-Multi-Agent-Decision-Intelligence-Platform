@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Enterprise Decision Agent Workspace supporting multi-turn conversations." />
+    <title>Enterprise Decision Agent</title>
+    <link rel="stylesheet" href="/assets/styles.css" />
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#query">Skip to Query Area</a>
+    <header class="app-header">
+      <div class="header-inner">
+        <div class="brand-block">
+          <span class="brand-mark" aria-hidden="true">ED</span>
+          <div>
+            <p class="eyebrow">Enterprise Intelligence Workspace</p>
+            <h1>Enterprise Decision Agent</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <div class="status-panel" aria-label="Service Status">
+            <span id="health-badge" class="status-badge status-checking"><span class="status-dot" aria-hidden="true"></span><span id="health-text">Checking Service</span></span>
+            <span id="ready-badge" class="status-badge status-checking"><span class="status-dot" aria-hidden="true"></span><span id="ready-text">Checking Analytics</span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <aside class="workspace-card" aria-labelledby="workspace-heading">
+        <div class="section-heading">
+          <div><p class="section-kicker">Workspace</p><h2 id="workspace-heading">Decision Assistant</h2></div>
+          <span class="workspace-label">Multi-turn</span>
+        </div>
+        <div class="session-block">
+          <div><span>Current Session</span><code id="session-id">Generating...</code></div>
+          <button id="clear-session" class="session-button" type="button">New Chat</button>
+        </div>
+        <div class="memory-note">
+          <span class="memory-icon" aria-hidden="true">M</span>
+          <p><strong>Multi-turn Follow-ups</strong><span>You can reference previous context using phrases like "among these" or "those products".</span></p>
+        </div>
+        <div class="capability-heading"><span>Tasks</span><small>Click to populate sample query</small></div>
+        <div class="examples" aria-label="Task Types and Example Queries">
+          <button class="example-button" type="button" data-route="Knowledge" data-query="What are the business positioning and demonstration scope of Huaheng Intelligent Technology Co., Ltd.?">
+            <span class="example-icon" aria-hidden="true">K</span><span><strong>Enterprise Knowledge</strong><small>Query enterprise docs with citations</small></span>
+          </button>
+          <button class="example-button" type="button" data-route="Data" data-query="As of June 30, 2026, which products are below safety stock?">
+            <span class="example-icon" aria-hidden="true">D</span><span><strong>Data Analysis</strong><small>Query operational data & insights</small></span>
+          </button>
+          <button class="example-button" type="button" data-route="Mixed" data-query="Based solely on current inventory data and DOC-INV-001 Inventory Safety Threshold and Replenishment Policy, analyze inventory risks as of June 30, 2026, and provide action recommendations.">
+            <span class="example-icon" aria-hidden="true">M</span><span><strong>Decision Recommendation</strong><small>Combine enterprise docs and data</small></span>
+          </button>
+        </div>
+        <div class="followup-card">
+          <strong>Follow-up Examples</strong>
+          <ol><li>Which products are below safety stock?</li><li>Which one has the highest risk?</li><li>Provide recommendations based on inventory policy.</li></ol>
+        </div>
+      </aside>
+
+      <section class="result-card" aria-labelledby="result-heading">
+        <div class="section-heading chat-heading">
+          <div><p class="section-kicker">Conversation</p><h2 id="result-heading">Business Analysis Chat</h2></div>
+          <span id="result-status" class="result-status">Awaiting Request</span>
+        </div>
+        <div id="request-message" class="message" role="status" aria-live="polite"></div>
+        <div id="chat-history" class="chat-history" aria-live="polite">
+          <article class="chat-message assistant-message welcome-message">
+            <div class="message-avatar" aria-hidden="true">AI</div>
+            <div class="message-body">
+              <div class="message-meta"><strong>Enterprise Decision Assistant</strong><span>Just now</span></div>
+              <p>Hello! I can assist with Enterprise Knowledge Q&amp;A, operational data analysis, and integrated decision recommendations. Feel free to ask follow-up questions referencing previous answers.</p>
+            </div>
+          </article>
+        </div>
+        <p id="answer" class="sr-only">Awaiting answer</p>
+        <form id="query-form" class="composer">
+          <label for="query">Enter Query</label>
+          <textarea id="query" name="query" rows="3" maxlength="4000" placeholder="Enter a question or follow up, e.g., Which one has the highest risk?" required></textarea>
+          <div class="form-footer">
+            <p class="keyboard-hint">Multi-turn conversation supported · Ctrl / ⌘ + Enter to send</p>
+            <div class="actions">
+              <button id="cancel-request" class="secondary-button" type="button" disabled>Cancel</button>
+              <button id="send-request" class="primary-button" type="submit">Send <span aria-hidden="true">↑</span></button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <aside class="inspector-card" aria-labelledby="inspector-heading">
+        <div class="section-heading">
+          <div><p class="section-kicker">Evidence</p><h2 id="inspector-heading">Result Evidence</h2></div>
+        </div>
+        <ol class="workflow-strip" aria-label="Agent Workflow">
+          <li><span>1</span><strong>Understand</strong><small>Identify task type</small></li>
+          <li><span>2</span><strong>Query</strong><small>Retrieve knowledge or data</small></li>
+          <li><span>3</span><strong>Synthesize</strong><small>Assemble valid evidence</small></li>
+          <li><span>4</span><strong>Review</strong><small>Verify evidence sufficiency</small></li>
+          <li><span>5</span><strong>Generate</strong><small>Output answer & citations</small></li>
+        </ol>
+        <section class="evidence-panel" aria-labelledby="citations-heading">
+          <div class="content-heading"><h3 id="citations-heading">Citations &amp; Evidence</h3><span>Traceable</span></div>
+          <ul id="citations" class="citation-list"><li>Awaiting evidence</li></ul>
+        </section>
+        <section class="metadata-panel" aria-labelledby="metadata-heading">
+          <div class="content-heading"><h3 id="metadata-heading">Current Run</h3><span>Execution Summary</span></div>
+          <dl id="metadata" class="metadata-list">
+            <div><dt>Status</dt><dd>Awaiting Request</dd></div>
+            <div><dt>Analysis Type</dt><dd>—</dd></div><div><dt>Skill Used</dt><dd>—</dd></div>
+            <div><dt>Session Context</dt><dd>—</dd></div>
+          </dl>
+        </section>
+        <section id="trace-card" class="trace-card" aria-labelledby="trace-heading" hidden>
+          <details><summary id="trace-heading">View Technical Trace</summary><p id="trace-summary" class="trace-summary"></p><ol id="trace-stages" class="trace-stage-list"></ol></details>
+        </section>
+      </aside>
+    </main>
+    <footer>Enterprise Decision Agent · Enterprise Knowledge · Operational Data · Decision Recommendation</footer>
+  </body>
+</html>
