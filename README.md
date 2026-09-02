@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ NexusAgent: Enterprise Autonomous Multi-Agent Decision Intelligence Platform
+#  NexusAgent: Enterprise Autonomous Multi-Agent Decision Intelligence Platform
 
 ### *Deterministic Evidence-Grounded Hybrid RAG × Model Context Protocol (MCP) NL2SQL × LangGraph Multi-Agent Orchestration*
 
