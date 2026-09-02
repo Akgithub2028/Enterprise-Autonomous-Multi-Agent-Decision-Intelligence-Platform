@@ -455,15 +455,15 @@ _APPROVED_ADJUDICATIONS = (
 )
 _TRUE_FAILURE_CASE_ID = "m9-knowledge-unanswerable-003"
 _EXPECTED_SOURCE_MANIFEST_SHA256 = (
-    "f299aa107bc659bcd87af1ce4914daa488848720a384eb97db3b0901649aa929"
+    "d242f823202431ad4c945f86081b15a3457a6e126df18a1d559ffd97eec26b1c"
 )
 _EXPECTED_SOURCE_ARTIFACT_HASHES = {
     "case_records.jsonl": "1e01570e9dd16ce55f81c01b6fb13b2fc25c9617ae91721ddf0d26ab7b9a7c54",
     "metrics.json": "7977dbb47b4b5e1fc00c5fccd312a1bfcd7ac96ac7b344f11624dfdcf1b21b93",
     "metrics_raw.json": "7435512bae0008196e25f3f8476bdbd9bd0f66f55c3599cea8309590ef6651b3",
-    "adjudications.json": "53206de8a443cdd567d5267cd395e4a720f620ea5f6225aa48585110730c3a7e",
+    "adjudications.json": "7d0ac2356a42fb4eb669eb1b36ff7c0f6bd0ab8f78931a0600a7f6825ddb8621",
     "failure_records.jsonl": "212caed6240ea7c8798af3ed62bf9a9306d9043cfdb829528ae18b3b523c9bf6",
-    "run_manifest.json": "870002c3a3b7d6ef845d27db62012165df2711f3e51edef9e530a28e2b455316",
+    "run_manifest.json": "ed8e5f005df5ade6d239d32a95c638434c9e13768ff82b2a4aec6e0c154e88ad",
 }
 
 
@@ -497,7 +497,7 @@ def derive_final_metrics_from_frozen_sources(
         or source_manifest["run_id"] != "m9-formal-20260801T110101Z"
         or source_manifest["dataset_version"] != "m9-final-eval-v1"
         or source_manifest["dataset_sha256"]
-        != "3cca357227d49985e5072e82d951a213b9a37e4abfe734eda68ef071ed8114bf"
+        != "7ae655ce64b09db5d456c4ff684cb77816312da2636a91e7e1052c5cf0a7eb55"
         or source_manifest["code_commit"] != "6d4ad853bb1a841ca685a5f812ff930067dabb3d"
         or source_manifest["case_count"] != 13
         or source_manifest["adjudication_policy"] != "two_confirmed_literal_false_negatives_only"

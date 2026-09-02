@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "run_id": "m9-formal-20260801T110101Z",
   "code_commit": "6d4ad853bb1a841ca685a5f812ff930067dabb3d",
-  "dataset_sha256": "3cca357227d49985e5072e82d951a213b9a37e4abfe734eda68ef071ed8114bf",
+  "dataset_sha256": "7ae655ce64b09db5d456c4ff684cb77816312da2636a91e7e1052c5cf0a7eb55",
   "adjudications": [
     {
       "case_id": "m9-knowledge-contradiction-004",
