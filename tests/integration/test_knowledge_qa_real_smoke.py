@@ -1,7 +1,5 @@
 """Opt-in real retrieval plus deterministic evidence-bound A2-3 smoke coverage."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json

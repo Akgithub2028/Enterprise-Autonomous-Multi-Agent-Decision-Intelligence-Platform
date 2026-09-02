@@ -35,7 +35,9 @@ def _unanswerable() -> AnswerabilityDecision:
 
 def test_reviewer_schema_accepts_valid_answerable_and_unanswerable_decisions() -> None:
     assert _answerable().missing_information is None
-    assert _unanswerable().missing_information == "New free warranty period after repair is completed"
+    assert (
+        _unanswerable().missing_information == "New free warranty period after repair is completed"
+    )
 
 
 @pytest.mark.parametrize(
@@ -102,7 +104,9 @@ def test_reviewer_prompt_declares_scope_and_output_constraints() -> None:
     assert "no Markdown" in _SYSTEM_PROMPT
     assert "same primary language" in _SYSTEM_PROMPT
     assert "operating data in a later stage" in _SYSTEM_PROMPT
-    assert "Do not require the policy Evidence to contain current operating values" in _SYSTEM_PROMPT
+    assert (
+        "Do not require the policy Evidence to contain current operating values" in _SYSTEM_PROMPT
+    )
 
 
 def test_chinese_query_prompt_repeats_mandatory_simplified_chinese_constraints() -> None:

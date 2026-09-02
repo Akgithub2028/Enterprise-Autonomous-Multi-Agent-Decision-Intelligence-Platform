@@ -197,8 +197,12 @@ def test_caller_and_result_metadata_cannot_mutate_index_state() -> None:
 
 
 def test_repeated_retrieval_is_identical() -> None:
-    retriever = BM25Retriever(BM25Index([document("a", "Product A Q2"), document("b", "Product B Q1")]))
-    assert retriever.retrieve("Product A Q2", top_k=2) == retriever.retrieve("Product A Q2", top_k=2)
+    retriever = BM25Retriever(
+        BM25Index([document("a", "Product A Q2"), document("b", "Product B Q1")])
+    )
+    assert retriever.retrieve("Product A Q2", top_k=2) == retriever.retrieve(
+        "Product A Q2", top_k=2
+    )
 
 
 def test_index_does_not_modify_input_document_sequence() -> None:
@@ -210,7 +214,12 @@ def test_index_does_not_modify_input_document_sequence() -> None:
 
 def test_product_identifier_changes_ranking() -> None:
     retriever = BM25Retriever(
-        BM25Index([document("product-a", "Product A battery warranty"), document("product-b", "Product B battery warranty")])
+        BM25Index(
+            [
+                document("product-a", "Product A battery warranty"),
+                document("product-b", "Product B battery warranty"),
+            ]
+        )
     )
     assert retriever.retrieve("Product A battery warranty", top_k=1)[0].document_id == "product-a"
 

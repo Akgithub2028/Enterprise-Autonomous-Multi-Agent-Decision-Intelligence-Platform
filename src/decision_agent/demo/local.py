@@ -1,7 +1,5 @@
 """Server-owned, least-privilege local demo over the formal configured runtime."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 from collections.abc import Callable, Iterable, Mapping

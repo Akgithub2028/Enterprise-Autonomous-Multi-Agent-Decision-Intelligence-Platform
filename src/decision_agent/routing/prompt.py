@@ -1,7 +1,5 @@
 """Narrow, non-executing prompt for the unified request router."""
 
-# ruff: noqa: E501
-
 KNOWLEDGE_CAPABILITY_SUMMARY = (
     "The Knowledge capability answers documented enterprise knowledge questions about policies, "
     "product rules, after-sales policies, procurement processes, enterprise identity and overview, "

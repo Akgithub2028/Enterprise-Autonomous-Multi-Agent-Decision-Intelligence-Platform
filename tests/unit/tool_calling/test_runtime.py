@@ -93,7 +93,13 @@ def final(answer: str, citations: list[str]) -> dict[str, Any]:
 @pytest.mark.parametrize(
     ("route", "tool_name", "query", "answer", "citations"),
     [
-        ("knowledge", "run_knowledge_agent", "Knowledge subquery", "Knowledge answer. [E1]", ["[E1]"]),
+        (
+            "knowledge",
+            "run_knowledge_agent",
+            "Knowledge subquery",
+            "Knowledge answer. [E1]",
+            ["[E1]"],
+        ),
         ("data", "run_data_agent", "Data subquery", "Data answer. [D1]", ["[D1]"]),
     ],
 )
@@ -178,7 +184,10 @@ async def test_second_turn_preserves_original_tool_calls_and_arguments_verbatim(
     assistant_message = model.calls[1]["messages"][2]  # type: ignore[index]
     assert result.status is NativeToolCallingStatus.COMPLETED
     assert assistant_message["tool_calls"] == original_tool_calls
-    assert assistant_message["tool_calls"][0]["function"]["arguments"] == '{"query":"Knowledge subquery"}'
+    assert (
+        assistant_message["tool_calls"][0]["function"]["arguments"]
+        == '{"query":"Knowledge subquery"}'
+    )
     assert assistant_message["tool_calls"][0]["index"] == 7
     assert model.calls[1]["messages"][3]["tool_call_id"] == "call_1"  # type: ignore[index]
     assert knowledge.queries == ["Knowledge subquery"]
@@ -201,7 +210,9 @@ async def test_second_turn_preserves_original_tool_calls_and_arguments_verbatim(
             "native_tool_arguments_invalid",
         ),
         (
-            native_call("run_knowledge_agent", arguments='{"query":"Knowledge subquery","extra":"x"}'),
+            native_call(
+                "run_knowledge_agent", arguments='{"query":"Knowledge subquery","extra":"x"}'
+            ),
             "native_tool_arguments_invalid",
         ),
         (

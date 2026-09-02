@@ -1,5 +1,3 @@
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json
@@ -35,7 +33,9 @@ def test_ready_plan_requires_sql_and_rejects_extra_answer_fields() -> None:
 @pytest.mark.parametrize("status", [DataPlanStatus.NEEDS_CLARIFICATION, DataPlanStatus.UNSUPPORTED])
 def test_non_ready_plan_cannot_carry_sql(status: DataPlanStatus) -> None:
     with pytest.raises(ValidationError):
-        DataQueryPlan(status=status, intent="clarify", sql="SELECT 1", decision_reason="Need more conditions")
+        DataQueryPlan(
+            status=status, intent="clarify", sql="SELECT 1", decision_reason="Need more conditions"
+        )
 
 
 def test_chinese_plan_requires_chinese_natural_language_fields() -> None:
@@ -46,7 +46,8 @@ def test_chinese_plan_requires_chinese_natural_language_fields() -> None:
         missing_information="\u7edf\u8ba1\u671f\u95f4",
     )
     assert validate_data_query_plan(
-        user_query="\u9500\u552e\u989d\u6700\u9ad8\u7684\u4ea7\u54c1\u662f\u4ec0\u4e48\uff1f", plan=plan
+        user_query="\u9500\u552e\u989d\u6700\u9ad8\u7684\u4ea7\u54c1\u662f\u4ec0\u4e48\uff1f",
+        plan=plan,
     ).validation_errors == ["data_planner_language_mismatch"]
 
 

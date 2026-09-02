@@ -1,7 +1,5 @@
 """Opt-in A2-3 real Retrieval, Reviewer, and Generator smoke coverage."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json
@@ -116,10 +114,19 @@ async def test_real_llm_four_question_smoke() -> None:
 
     battery, procurement, l3, q010 = results
     assert battery.answerability is Answerability.ANSWERABLE
-    assert any(term in (battery.answer or "").lower() for term in ("12 month", "twelve month", "12", "twelve"))
+    assert any(
+        term in (battery.answer or "").lower()
+        for term in ("12 month", "twelve month", "12", "twelve")
+    )
     assert battery.citations
     assert procurement.answerability is Answerability.ANSWERABLE
-    assert any(term in (procurement.answer or "").lower() for term in ("procurement director", "procurement")) and procurement.citations
+    assert (
+        any(
+            term in (procurement.answer or "").lower()
+            for term in ("procurement director", "procurement")
+        )
+        and procurement.citations
+    )
     assert l3.answerability is Answerability.ANSWERABLE
     assert any(term in (l3.answer or "").lower() for term in ("department head", "department"))
     assert l3.citations

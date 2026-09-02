@@ -24,7 +24,9 @@ def _chunker(*, parent: int = 160, child: int = 80, overlap: int = 20) -> Clause
 
 
 def test_heading_paths_and_section_metadata_are_stable() -> None:
-    block = _block("# Main Title\n## Section One\nClause ID: TEST-ONE\nAlpha\n## Section Two\nClause ID: TEST-TWO\nBeta\n")
+    block = _block(
+        "# Main Title\n## Section One\nClause ID: TEST-ONE\nAlpha\n## Section Two\nClause ID: TEST-TWO\nBeta\n"
+    )
     result = _chunker().chunk(block)
 
     assert [parent.metadata["section_path"] for parent in result.parents] == [

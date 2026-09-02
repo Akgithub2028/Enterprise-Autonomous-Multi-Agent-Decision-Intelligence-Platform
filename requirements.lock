@@ -79,7 +79,7 @@ pyjwt==2.13.0
 pymilvus==2.6.17
 pymysql==1.2.0
 pyparsing==3.3.2
-pypdf==6.15.0
+pypdf==6.16.2
 pyproject-hooks==1.2.0
 pytest==9.1.1
 pytest-asyncio==1.4.0

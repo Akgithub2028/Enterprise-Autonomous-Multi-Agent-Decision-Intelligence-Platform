@@ -198,7 +198,9 @@ class _DeterministicEnterpriseDataClient:
 
     async def get_business_definitions(self) -> BusinessDefinitions:
         self.definition_calls += 1
-        return BusinessDefinitions(definitions={"inventory_risk": "Inventory is below safety stock."})
+        return BusinessDefinitions(
+            definitions={"inventory_risk": "Inventory is below safety stock."}
+        )
 
     async def execute_safe_query(self, sql: str) -> MCPQueryResult:
         self.queries.append(sql)
@@ -481,7 +483,10 @@ async def test_formal_runtime_executes_mixed_application_path() -> None:
     )
 
     response = await executor.execute(
-        FormalRequest(request_id="m6b-mixed", user_query="Diagnose current inventory risks and provide replenishment recommendations")
+        FormalRequest(
+            request_id="m6b-mixed",
+            user_query="Diagnose current inventory risks and provide replenishment recommendations",
+        )
     )
 
     assert isinstance(response, FormalResponse)

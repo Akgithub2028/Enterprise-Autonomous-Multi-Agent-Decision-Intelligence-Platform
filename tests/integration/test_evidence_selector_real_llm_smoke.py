@@ -1,7 +1,5 @@
 """Opt-in 2-2 real-RAG plus real-Selector smoke without answer generation."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json
@@ -19,10 +17,22 @@ from decision_agent.retrieval.factory import build_enterprise_retrieval_pipeline
 pytestmark = pytest.mark.integration
 
 _CASES = (
-    ("How long is the base warranty period for Product A's original battery?", "DOC-CS-001", "DOC-INV-001"),
-    ("Who needs to approve a standard procurement request of 180,000 CNY?", "DOC-PROC-001", "DOC-FIN-001"),
+    (
+        "How long is the base warranty period for Product A's original battery?",
+        "DOC-CS-001",
+        "DOC-INV-001",
+    ),
+    (
+        "Who needs to approve a standard procurement request of 180,000 CNY?",
+        "DOC-PROC-001",
+        "DOC-FIN-001",
+    ),
     ("What approvals are required to access L3 confidential data?", "DOC-SEC-001", "DOC-HR-001"),
-    ("How many days of free repair warranty does the company commit to after repairing Product A?", None, None),
+    (
+        "How many days of free repair warranty does the company commit to after repairing Product A?",
+        None,
+        None,
+    ),
 )
 
 

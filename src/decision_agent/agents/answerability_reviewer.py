@@ -1,7 +1,5 @@
 """Structured answerability review behind an injectable async contract."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import asyncio

@@ -1,5 +1,3 @@
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json
@@ -34,7 +32,9 @@ def test_data_answer_requires_exact_inline_d_citation() -> None:
         DataAnswerDraft(answer="Sales revenue is 12,000 USD.[E1]", citations=["[E1]"]),
         DataAnswerDraft(answer="Sales revenue is 12,000 USD.[D1]", citations=["D1"]),
         DataAnswerDraft(answer="Sales revenue is 12,000 USD.[D2]", citations=["[D2]"]),
-        DataAnswerDraft(answer="According to D1, sales revenue is 12,000 USD.[D1]", citations=["[D1]"]),
+        DataAnswerDraft(
+            answer="According to D1, sales revenue is 12,000 USD.[D1]", citations=["[D1]"]
+        ),
     ],
 )
 def test_data_answer_rejects_invalid_or_unavailable_citations(draft: DataAnswerDraft) -> None:

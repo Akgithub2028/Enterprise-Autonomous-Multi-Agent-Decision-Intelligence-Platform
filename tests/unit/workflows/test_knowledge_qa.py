@@ -1,7 +1,5 @@
 """Offline behavior tests for the fixed evidence-grounded QA graph."""
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 from types import SimpleNamespace
@@ -462,7 +460,8 @@ async def test_unanswerable_answer_does_not_echo_a_reviewer_missing_number() -> 
         )
     )
     result = await run_knowledge_qa(
-        _graph(reviewer=reviewer), user_query="How long is the free warranty after repair completion?"
+        _graph(reviewer=reviewer),
+        user_query="How long is the free warranty after repair completion?",
     )
 
     assert result.answerability is Answerability.UNANSWERABLE
@@ -489,7 +488,9 @@ async def test_unanswerable_answer_does_not_echo_a_reviewer_missing_number() -> 
             "reviewer_language_mismatch",
         ),
         (
-            RecordingReviewer({"answerability": "unanswerable", "decision_reason": "\u4e2d\u6587\u8bf4\u660e"}),
+            RecordingReviewer(
+                {"answerability": "unanswerable", "decision_reason": "\u4e2d\u6587\u8bf4\u660e"}
+            ),
             "invalid_answerability_decision",
         ),
     ],

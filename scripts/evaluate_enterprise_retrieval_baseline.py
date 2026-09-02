@@ -32,7 +32,10 @@ CLI_EXAMPLES = (
     ("M2C1-Q001", "How long is the base warranty period for Product A's original battery?"),
     ("M2C1-Q025", "Who needs to approve a standard procurement request of 180,000 CNY?"),
     ("M2C1-Q045", "What approvals are required to access L3 confidential data?"),
-    ("M2C1-Q010", "How many days of free repair warranty does the company commit to after repairing Product A?"),
+    (
+        "M2C1-Q010",
+        "How many days of free repair warranty does the company commit to after repairing Product A?",
+    ),
 )
 
 

@@ -1,7 +1,5 @@
 """One-tool native OpenAI-compatible function-calling runtime."""
 
-# ruff: noqa: E501
-
 from __future__ import annotations
 
 import asyncio

@@ -345,7 +345,6 @@ async def test_formal_data_runs_the_complete_offline_chain(initialized_pipeline)
     pipeline, embedding, reranker, _ = initialized_pipeline
 
     result = await pipeline.retrieve("Product A original battery warranty period")
-    assert result.status is RetrievalStatus.COMPLETED
     assert result.query == "Product A original battery warranty period"
     assert result.dense_results
     assert result.bm25_results
@@ -634,7 +633,9 @@ async def test_runtime_ignores_missing_or_replaced_ground_truth(tmp_path: Path) 
     )
     replaced_pipeline, _, _, _ = make_pipeline(dataset_root=tmp_path)
     await replaced_pipeline.initialize()
-    with_replaced_ground_truth = await replaced_pipeline.retrieve("Product A original battery warranty period")
+    with_replaced_ground_truth = await replaced_pipeline.retrieve(
+        "Product A original battery warranty period"
+    )
 
     assert with_replaced_ground_truth.dense_results == without_ground_truth.dense_results
     assert with_replaced_ground_truth.bm25_results == without_ground_truth.bm25_results

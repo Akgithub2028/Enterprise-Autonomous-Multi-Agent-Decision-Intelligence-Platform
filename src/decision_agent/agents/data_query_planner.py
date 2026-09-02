@@ -1,7 +1,5 @@
 """Structured, OpenAI-compatible planning for one safe enterprise data query."""
 
-# ruff: noqa: E501, RUF001
-
 from __future__ import annotations
 
 import asyncio

@@ -1,5 +1,4 @@
 """Versioned CrossEncoder reranking evaluation over immutable RRF candidates."""
-# ruff: noqa: E501
 
 from __future__ import annotations
 

@@ -88,7 +88,10 @@ async def test_real_controlled_inventory_runtime_is_bounded_grounded_and_private
     assert response.result.skill_name == "inventory-risk-diagnosis"
     assert response.result.answer is not None
     assert "Risk" in response.result.answer or "risk" in response.result.answer.lower()
-    assert any(term in response.result.answer.lower() for term in ("recommend", "replenish", "action", "order"))
+    assert any(
+        term in response.result.answer.lower()
+        for term in ("recommend", "replenish", "action", "order")
+    )
     assert any(citation.startswith("[D") for citation in response.result.citations)
     assert any(citation.startswith("[E") for citation in response.result.citations)
     assert all(citation in response.result.answer for citation in response.result.citations)

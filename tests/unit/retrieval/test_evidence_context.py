@@ -80,14 +80,18 @@ def test_per_item_truncation_includes_marker_within_limit() -> None:
 
 
 def test_total_budget_truncates_and_never_overflows() -> None:
-    header_length = len("[E1]\nDocument ID: doc\nSource: report.txt\nPage: 2\nOffset: 0-10\nContent:")
+    header_length = len(
+        "[E1]\nDocument ID: doc\nSource: report.txt\nPage: 2\nOffset: 0-10\nContent:"
+    )
     result = builder(total=header_length + 6, marker="...").build([parent("p1", 1, "abcdefgh")])
     assert result.evidence_items[0].content == "abc..."
     assert len(result.rendered_context) == header_length + 6
 
 
 def test_budget_that_cannot_fit_original_and_marker_omits_item() -> None:
-    header_length = len("[E1]\nDocument ID: doc\nSource: report.txt\nPage: 2\nOffset: 0-10\nContent:")
+    header_length = len(
+        "[E1]\nDocument ID: doc\nSource: report.txt\nPage: 2\nOffset: 0-10\nContent:"
+    )
     result = builder(total=header_length + 3, marker="...").build([parent("p1", 1)])
     assert result.included_evidence_count == 0 and result.omitted_evidence_count == 1
 
@@ -101,7 +105,9 @@ def test_missing_source_and_page_are_not_fabricated() -> None:
     item = parent("p1", 1, source=False).model_copy(update={"metadata": {}})
     result = builder().build([item])
     assert result.references[0].source is None and result.references[0].page_number is None
-    assert "Source:" not in result.rendered_context and "Document ID: doc" in result.rendered_context
+    assert (
+        "Source:" not in result.rendered_context and "Document ID: doc" in result.rendered_context
+    )
 
 
 def test_input_and_nested_output_are_deep_copied() -> None:

@@ -78,7 +78,10 @@ def test_router_prompt_includes_enterprise_profile_and_agent_boundary_classifica
         ("Can you modify orders?", RequestRoute.KNOWLEDGE),
         ("What are the company's inventory alert rules?", RequestRoute.KNOWLEDGE),
         ("Query items below safety stock", RequestRoute.DATA),
-        ("Combine inventory data and replenishment policy to give recommendations", RequestRoute.MIXED),
+        (
+            "Combine inventory data and replenishment policy to give recommendations",
+            RequestRoute.MIXED,
+        ),
         ("Hello, I am John", RequestRoute.UNSUPPORTED),
         ("How is the weather today?", RequestRoute.UNSUPPORTED),
         ("Tell me a joke", RequestRoute.UNSUPPORTED),

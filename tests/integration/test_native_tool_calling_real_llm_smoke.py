@@ -32,8 +32,12 @@ def _decision(route: str) -> RouterDecision:
         route=route,
         normalized_query="Enterprise question",
         decision_reason="Routing completed.",
-        knowledge_subquery="What is the after-sales warranty policy for Product A?" if route == "knowledge" else None,
-        data_subquery="Which product had the highest sales revenue in May?" if route == "data" else None,
+        knowledge_subquery="What is the after-sales warranty policy for Product A?"
+        if route == "knowledge"
+        else None,
+        data_subquery="Which product had the highest sales revenue in May?"
+        if route == "data"
+        else None,
         missing_information=None,
         confidence=0.9,
     )

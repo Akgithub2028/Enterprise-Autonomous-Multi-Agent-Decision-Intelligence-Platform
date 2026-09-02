@@ -21,7 +21,10 @@ def _nonblank_query(value: str) -> str:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--query", required=True, type=_nonblank_query, help="Enterprise knowledge query to retrieve"
+        "--query",
+        required=True,
+        type=_nonblank_query,
+        help="Enterprise knowledge query to retrieve",
     )
     parser.add_argument(
         "--dataset-root",

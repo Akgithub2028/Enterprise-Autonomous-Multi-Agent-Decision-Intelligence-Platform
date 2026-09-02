@@ -17,7 +17,8 @@ from decision_agent.skills.inventory_risk_synthesizer import (
 
 
 def mixed(
-    data: str | None = "Inventory below safety stock", knowledge: str | None = "Replenishment policy"
+    data: str | None = "Inventory below safety stock",
+    knowledge: str | None = "Replenishment policy",
 ) -> RouterDecision:
     return RouterDecision(
         route=RequestRoute.MIXED,
@@ -134,7 +135,9 @@ def make_skill(
     )
 
 
-@pytest.mark.parametrize("query", ["How to replenish when stock is low", "inventory stockout replenishment"])
+@pytest.mark.parametrize(
+    "query", ["How to replenish when stock is low", "inventory stockout replenishment"]
+)
 def test_inventory_topics_apply(query: str) -> None:
     skill, _, _, _ = make_skill()
     assert skill.is_applicable(query, mixed()) is True
@@ -208,7 +211,9 @@ async def test_data_then_knowledge_subdecisions_are_isolated_and_ordered() -> No
     skill, data_skill, knowledge_skill, calls = make_skill()
     original = mixed("Current inventory risk", "Replenishment policy requirements")
 
-    result = await skill.execute(user_query="Inventory risk and replenishment policy", decision=original)
+    result = await skill.execute(
+        user_query="Inventory risk and replenishment policy", decision=original
+    )
 
     assert result.status is SkillStatus.COMPLETED
     assert result.error_code is None and result.selected_tool is None

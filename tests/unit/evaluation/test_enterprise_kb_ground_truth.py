@@ -125,9 +125,7 @@ def test_missing_clause_marker_fails() -> None:
 
 
 def test_duplicate_clause_marker_fails() -> None:
-    document = _synthetic_document(
-        "Clause ID: TEST-ONE\nfirst\nClause ID: TEST-ONE\nsecond"
-    )
+    document = _synthetic_document("Clause ID: TEST-ONE\nfirst\nClause ID: TEST-ONE\nsecond")
     with pytest.raises(EvaluationValidationError, match="duplicate Clause marker"):
         ground_truth_module._locate_clause_spans(document)
 

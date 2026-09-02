@@ -161,7 +161,9 @@ def test_synthesis_models_are_strict_immutable_and_evidence_bounded() -> None:
 async def test_synthesizer_receives_only_trusted_public_input_once() -> None:
     skill, synthesizer = make_skill(synthesis())
 
-    result = await skill.execute(user_query="Inventory risk and replenishment policy", decision=mixed())
+    result = await skill.execute(
+        user_query="Inventory risk and replenishment policy", decision=mixed()
+    )
 
     assert result.status is SkillStatus.COMPLETED
     assert len(synthesizer.inputs) == 1
@@ -188,7 +190,9 @@ async def test_valid_synthesis_is_rendered_with_stable_deduplicated_citations() 
         knowledge_citations=["[E2]", "[E1]"],
     )
 
-    result = await skill.execute(user_query="Inventory risk and replenishment policy", decision=mixed())
+    result = await skill.execute(
+        user_query="Inventory risk and replenishment policy", decision=mixed()
+    )
 
     assert result.status is SkillStatus.COMPLETED
     assert result.selected_tool is None

@@ -100,7 +100,10 @@ def test_utf8_text_and_markdown_content_is_preserved() -> None:
 
     assert "Service Maintenance Notice" in text_block.content
     assert "work order system" in text_block.content
-    assert "# Huaheng Intelligence Internal Test Environment Security Guidelines" in markdown_block.content
+    assert (
+        "# Huaheng Intelligence Internal Test Environment Security Guidelines"
+        in markdown_block.content
+    )
     assert "ParserRegistry" in markdown_block.content
 
 

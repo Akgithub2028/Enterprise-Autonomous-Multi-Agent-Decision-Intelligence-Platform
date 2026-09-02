@@ -6,8 +6,6 @@ controlled workflow, Skills, Knowledge/Data graphs, retrieval pipeline, SafeQuer
 MCP client mapping, and request trace path.
 """
 
-# ruff: noqa: RUF001
-
 from __future__ import annotations
 
 import json
@@ -61,7 +59,9 @@ from decision_agent.tool_calling.runtime import OpenAICompatibleNativeToolCallin
 from decision_agent.tool_calling.tools import DataAgentTool, KnowledgeAgentTool
 from decision_agent.workflows.knowledge_qa import build_knowledge_qa_graph
 
-_USER_QUERY = "Please provide replenishment recommendations based on inventory data and inventory policy"
+_USER_QUERY = (
+    "Please provide replenishment recommendations based on inventory data and inventory policy"
+)
 _DATA_QUERY = "Query current inventory and safety stock"
 _KNOWLEDGE_QUERY = "Query inventory alert and replenishment policy"
 
@@ -373,7 +373,10 @@ async def build_offline_controlled_inventory_runtime(
         timeout_seconds=1,
     )
     selector._post = lambda query, context: _completion(  # type: ignore[method-assign]
-        {"selected_evidence_ids": ["[E1]"], "selection_reason": "Inventory policy is directly relevant."}
+        {
+            "selected_evidence_ids": ["[E1]"],
+            "selection_reason": "Inventory policy is directly relevant.",
+        }
     )
     knowledge_reviewer = OpenAICompatibleAnswerabilityReviewer(
         api_key="offline-test-key",
@@ -395,7 +398,10 @@ async def build_offline_controlled_inventory_runtime(
         timeout_seconds=1,
     )
     knowledge_answer._post = lambda *args: _completion(  # type: ignore[method-assign]
-        {"answer": "Replenishment evaluation is required when inventory falls below safety stock.[E1]", "citations": ["[E1]"]}
+        {
+            "answer": "Replenishment evaluation is required when inventory falls below safety stock.[E1]",
+            "citations": ["[E1]"],
+        }
     )
     knowledge_tool = KnowledgeAgentTool(
         graph=build_knowledge_qa_graph(
