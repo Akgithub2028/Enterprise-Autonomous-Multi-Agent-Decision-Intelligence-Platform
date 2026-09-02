@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">NexusAgent logo</title>
+  <desc id="desc">A geometric nexus mark representing agent orchestration, hybrid retrieval, enterprise data and evidence verification.</desc>
+  <defs>
+    <linearGradient id="grad" x1="78" y1="72" x2="438" y2="440" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="0.5" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="core" x1="178" y1="148" x2="334" y2="350" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#1E293B"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+
+  <!-- Nexus ring: secure system boundary / enterprise scope -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="url(#grad)" stroke-width="18" stroke-linecap="round" stroke-dasharray="255 34 82 34 72"/>
+
+  <!-- Orchestration links: Router -> Retrieval / Data -> Evidence -->
+  <g fill="none" stroke="url(#grad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 92 V174"/>
+    <path d="M122 332 L193 291"/>
+    <path d="M390 332 L319 291"/>
+    <path d="M122 180 L184 216" opacity="0.9"/>
+    <path d="M390 180 L328 216" opacity="0.9"/>
+  </g>
+
+  <!-- Evidence / data nodes -->
+  <g fill="url(#grad)" filter="url(#shadow)">
+    <circle cx="256" cy="86" r="22"/>
+    <circle cx="109" cy="341" r="20"/>
+    <circle cx="403" cy="341" r="20"/>
+    <circle cx="108" cy="174" r="16"/>
+    <circle cx="404" cy="174" r="16"/>
+  </g>
+
+  <!-- Central agentic decision core -->
+  <path d="M256 155 L330 198 V284 L256 327 L182 284 V198 Z" fill="url(#core)" stroke="url(#grad)" stroke-width="10" filter="url(#shadow)"/>
+
+  <!-- Stylized N / graph junction -->
+  <path d="M213 266 V216 L299 266 V216" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="213" cy="216" r="10" fill="#FFFFFF"/>
+  <circle cx="256" cy="241" r="10" fill="#FFFFFF"/>
+  <circle cx="299" cy="216" r="10" fill="#FFFFFF"/>
+
+  <!-- Verified evidence check / decision release -->
+  <path d="M228 292 L247 310 L286 270" fill="none" stroke="#67E8F9" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
