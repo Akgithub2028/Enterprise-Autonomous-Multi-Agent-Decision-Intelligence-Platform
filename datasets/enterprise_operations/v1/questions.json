@@ -1,0 +1,74 @@
+[
+  {
+    "question_id": "ops-v1-q01",
+    "question": "What is the product with the highest valid sales revenue in May 2026?",
+    "business_domain": "sales",
+    "expected_result": {"columns": ["product_id", "product_name", "sales_amount"], "rows": [["P100", "Aster Industrial Pump", "12000.00"]]},
+    "verification_sql": "SELECT p.product_id, p.product_name, SUM(i.quantity * i.unit_price) AS sales_amount FROM sales_orders AS o JOIN sales_order_items AS i ON o.sales_order_id = i.sales_order_id JOIN products AS p ON i.product_id = p.product_id WHERE o.order_date >= '2026-05-01' AND o.order_date < '2026-06-01' AND o.status IN ('confirmed', 'shipped', 'completed') GROUP BY p.product_id, p.product_name ORDER BY sales_amount DESC, p.product_id ASC LIMIT 1",
+    "important_filters": ["order_date: [2026-05-01, 2026-06-01)", "effective sales statuses only"],
+    "notes": "Sales revenue is aggregated by order item quantity × unit_price; cancelled orders are excluded."
+  },
+  {
+    "question_id": "ops-v1-q02",
+    "question": "Which products currently have on-hand inventory below their safety stock?",
+    "business_domain": "inventory",
+    "expected_result": {"columns": ["product_id", "product_name", "on_hand_quantity", "safety_stock"], "rows": [["P100", "Aster Industrial Pump", 40, 50], ["P300", "Cirrus Sensor", 90, 100], ["P600", "Flux Industrial Cable", 110, 120]]},
+    "verification_sql": "WITH latest_inventory AS (SELECT s.product_id, s.on_hand_quantity FROM inventory_snapshots AS s JOIN (SELECT product_id, MAX(snapshot_date) AS snapshot_date FROM inventory_snapshots GROUP BY product_id) AS latest ON s.product_id = latest.product_id AND s.snapshot_date = latest.snapshot_date) SELECT p.product_id, p.product_name, li.on_hand_quantity, p.safety_stock FROM products AS p JOIN latest_inventory AS li ON p.product_id = li.product_id WHERE li.on_hand_quantity < p.safety_stock ORDER BY p.product_id ASC",
+    "important_filters": ["latest snapshot per product", "on_hand_quantity < safety_stock"],
+    "notes": "Current inventory is selected per product by its latest snapshot; equal to safety stock is not a risk."
+  },
+  {
+    "question_id": "ops-v1-q03",
+    "question": "What is the total valid procurement spend in May 2026?",
+    "business_domain": "procurement",
+    "expected_result": {"columns": ["effective_purchase_amount"], "rows": [["19840.00"]]},
+    "verification_sql": "SELECT SUM(quantity * unit_cost) AS effective_purchase_amount FROM purchase_orders WHERE order_date >= '2026-05-01' AND order_date < '2026-06-01' AND status IN ('ordered', 'partially_delivered', 'delivered')",
+    "important_filters": ["order_date: [2026-05-01, 2026-06-01)", "cancelled purchase orders excluded"],
+    "notes": "Valid procurement spend is summed by valid purchase order quantity × unit_cost."
+  },
+  {
+    "question_id": "ops-v1-q04",
+    "question": "What is the on-time delivery rate for each supplier?",
+    "business_domain": "supplier_delivery",
+    "expected_result": {"columns": ["supplier_id", "supplier_name", "delivered_order_count", "on_time_delivery_rate"], "rows": [["S100", "Anhai Manufacturing", 2, "100.00"], ["S200", "Beichen Supply", 2, "50.00"], ["S300", "Changjiang Industries", 1, "0.00"], ["S400", "Dongfang Components", 0, null]]},
+    "verification_sql": "SELECT s.supplier_id, s.supplier_name, COUNT(po.purchase_order_id) AS delivered_order_count, ROUND(100 * SUM(CASE WHEN po.actual_delivery_date <= po.promised_delivery_date THEN 1 ELSE 0 END) / NULLIF(COUNT(po.purchase_order_id), 0), 2) AS on_time_delivery_rate FROM suppliers AS s LEFT JOIN purchase_orders AS po ON s.supplier_id = po.supplier_id AND po.status = 'delivered' AND po.actual_delivery_date IS NOT NULL GROUP BY s.supplier_id, s.supplier_name ORDER BY s.supplier_id ASC",
+    "important_filters": ["delivered orders with actual_delivery_date only", "cancelled and open purchase orders excluded from denominator"],
+    "notes": "On-time means actual_delivery_date <= promised_delivery_date; rate is NULL when there are no delivered orders."
+  },
+  {
+    "question_id": "ops-v1-q05",
+    "question": "Among suppliers with at least one delivered purchase order, who has the lowest on-time delivery rate?",
+    "business_domain": "supplier_delivery",
+    "expected_result": {"columns": ["supplier_id", "supplier_name", "on_time_delivery_rate"], "rows": [["S300", "Changjiang Industries", "0.00"]]},
+    "verification_sql": "WITH delivery_rates AS (SELECT s.supplier_id, s.supplier_name, ROUND(100 * SUM(CASE WHEN po.actual_delivery_date <= po.promised_delivery_date THEN 1 ELSE 0 END) / COUNT(po.purchase_order_id), 2) AS on_time_delivery_rate FROM suppliers AS s JOIN purchase_orders AS po ON s.supplier_id = po.supplier_id WHERE po.status = 'delivered' AND po.actual_delivery_date IS NOT NULL GROUP BY s.supplier_id, s.supplier_name) SELECT supplier_id, supplier_name, on_time_delivery_rate FROM delivery_rates ORDER BY on_time_delivery_rate ASC, supplier_id ASC LIMIT 1",
+    "important_filters": ["requires at least one delivered purchase order", "on-time definition matches ops-v1-q04"],
+    "notes": "Suppliers without delivered orders are excluded from the comparison."
+  },
+  {
+    "question_id": "ops-v1-q06",
+    "question": "Which product experienced the largest sales volume decline in June 2026 compared to May 2026?",
+    "business_domain": "sales",
+    "expected_result": {"columns": ["product_id", "product_name", "may_quantity", "june_quantity", "quantity_decline"], "rows": [["P100", "Aster Industrial Pump", "120", "40", "80"]]},
+    "verification_sql": "WITH monthly_sales AS (SELECT i.product_id, SUM(CASE WHEN o.order_date >= '2026-05-01' AND o.order_date < '2026-06-01' THEN i.quantity ELSE 0 END) AS may_quantity, SUM(CASE WHEN o.order_date >= '2026-06-01' AND o.order_date < '2026-07-01' THEN i.quantity ELSE 0 END) AS june_quantity FROM sales_orders AS o JOIN sales_order_items AS i ON o.sales_order_id = i.sales_order_id WHERE o.status IN ('confirmed', 'shipped', 'completed') GROUP BY i.product_id) SELECT p.product_id, p.product_name, m.may_quantity, m.june_quantity, m.may_quantity - m.june_quantity AS quantity_decline FROM monthly_sales AS m JOIN products AS p ON m.product_id = p.product_id WHERE m.may_quantity > m.june_quantity ORDER BY quantity_decline DESC, p.product_id ASC LIMIT 1",
+    "important_filters": ["May [2026-05-01, 2026-06-01) versus June [2026-06-01, 2026-07-01)", "effective sales statuses only"],
+    "notes": "Sales volume is summed by item quantity; only products with an actual decline are compared."
+  },
+  {
+    "question_id": "ops-v1-q07",
+    "question": "Which purchase orders have been placed but not yet delivered?",
+    "business_domain": "procurement",
+    "expected_result": {"columns": ["purchase_order_number", "supplier_name", "product_name", "status", "promised_delivery_date"], "rows": [["PO-2026-0602", "Changjiang Industries", "Delta Drive", "ordered", "2026-06-25"], ["PO-2026-0603", "Dongfang Components", "Harbor Seal", "partially_delivered", "2026-06-28"]]},
+    "verification_sql": "SELECT po.purchase_order_number, s.supplier_name, p.product_name, po.status, po.promised_delivery_date FROM purchase_orders AS po JOIN suppliers AS s ON po.supplier_id = s.supplier_id JOIN products AS p ON po.product_id = p.product_id WHERE po.status IN ('ordered', 'partially_delivered') AND po.actual_delivery_date IS NULL ORDER BY po.purchase_order_number ASC",
+    "important_filters": ["status in ordered, partially_delivered", "actual_delivery_date is NULL", "cancelled orders excluded"],
+    "notes": "Not yet delivered excludes cancelled or delivered orders."
+  },
+  {
+    "question_id": "ops-v1-q08",
+    "question": "What are the combined sales revenue and inventory risk results for the Sensors category in Q2 2026?",
+    "business_domain": "sales_inventory",
+    "expected_result": {"columns": ["product_id", "product_name", "quarter_sales_amount", "on_hand_quantity", "safety_stock", "inventory_risk"], "rows": [["P300", "Cirrus Sensor", "11200.00", 90, 100, "low_stock"]]},
+    "verification_sql": "WITH category_sales AS (SELECT i.product_id, SUM(i.quantity * i.unit_price) AS quarter_sales_amount FROM sales_orders AS o JOIN sales_order_items AS i ON o.sales_order_id = i.sales_order_id WHERE o.order_date >= '2026-04-01' AND o.order_date < '2026-07-01' AND o.status IN ('confirmed', 'shipped', 'completed') GROUP BY i.product_id), latest_inventory AS (SELECT s.product_id, s.on_hand_quantity FROM inventory_snapshots AS s JOIN (SELECT product_id, MAX(snapshot_date) AS snapshot_date FROM inventory_snapshots GROUP BY product_id) AS latest ON s.product_id = latest.product_id AND s.snapshot_date = latest.snapshot_date) SELECT p.product_id, p.product_name, cs.quarter_sales_amount, li.on_hand_quantity, p.safety_stock, CASE WHEN li.on_hand_quantity < p.safety_stock THEN 'low_stock' ELSE 'normal' END AS inventory_risk FROM products AS p JOIN category_sales AS cs ON p.product_id = cs.product_id JOIN latest_inventory AS li ON p.product_id = li.product_id WHERE p.category = 'Sensors' ORDER BY p.product_id ASC",
+    "important_filters": ["Q2 [2026-04-01, 2026-07-01)", "effective sales statuses", "latest snapshot per product"],
+    "notes": "Sales revenue and inventory risk are calculated under unified rules before combined presentation."
+  }
+]

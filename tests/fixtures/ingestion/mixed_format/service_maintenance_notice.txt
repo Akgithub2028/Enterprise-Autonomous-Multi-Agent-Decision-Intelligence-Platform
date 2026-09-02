@@ -1,0 +1,11 @@
+Huaheng Intelligence Technology Co., Ltd. Service Maintenance Notice
+
+This notice explains fictional inspection terminal maintenance windows and customer communication requirements. The Customer Service Department plans to conduct routine maintenance on the after-sales work order system over the weekend. During maintenance, new requests can still be recorded via offline registration forms, and duty personnel will backfill them in original submission order once the system is restored. No personnel may modify customer first contact time to shorten statistical duration, nor mark unresolved requests as completed in advance.
+
+Before maintenance begins, the service lead should verify open work orders, emergency contact roles, backup status, and recovery checklists. For records involving arrival defects of Product A or Product B, product model, serial number, receipt date, failure symptoms, and completed diagnostic steps must be retained. Batteries, charging bases, and main units must be registered separately to avoid improperly classifying accessory issues under main unit warranty coverage.
+
+After system recovery, duty personnel must first verify login, query, attachment upload, and status transition workflows before backfilling offline items in batches. Backfilled records should state the actual receipt time and reason for backfill. If data omission, duplicate numbering, or timestamp anomalies are discovered, batch processing must be paused and reported to the Information Security Office; original spreadsheets must not be deleted to conceal discrepancies.
+
+This notice does not alter formal warranty, return/repair, or data access policies, nor does it establish new service terms. All enterprise names, products, and scenarios are fictional content used for offline testing.
+
+Maintenance reviews only record whether processes were completed, anomalies closed, and evidence traceable; they do not evaluate real customers or individuals, nor write test results into formal business reports.

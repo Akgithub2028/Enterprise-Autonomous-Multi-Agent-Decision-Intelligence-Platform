@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "company": {"id": "company-huaheng", "name": "Huaheng Intelligent Technology Co., Ltd.", "aliases": ["Huaheng Intelligent", "Huaheng Tech", "Company", "Enterprise", "the Company", "our company", "this enterprise", "sample enterprise"]},
+  "agents": [
+    {"id": "agent-enterprise-decision-assistant", "name": "Enterprise Agent", "aliases": ["Agent", "Decision Assistant", "Enterprise AI Assistant"]}
+  ],
+  "departments": [
+    {"id": "dept-customer-service", "name": "Customer Service Department", "aliases": ["Customer Service"]},
+    {"id": "dept-sales-operations", "name": "Sales Operations Department", "aliases": ["Sales Operations"]},
+    {"id": "dept-regional-sales", "name": "Regional Sales Center", "aliases": ["Regional Sales"]},
+    {"id": "dept-supply-chain", "name": "Supply Chain Center", "aliases": ["Supply Chain"]},
+    {"id": "dept-procurement", "name": "Procurement Management Department", "aliases": ["Procurement"]},
+    {"id": "dept-warehouse", "name": "Warehouse Management Department", "aliases": ["Warehouse"]},
+    {"id": "dept-finance", "name": "Finance Management Department", "aliases": ["Finance"]},
+    {"id": "dept-hr", "name": "Human Resources Department", "aliases": ["HR"]},
+    {"id": "dept-security", "name": "Information Security Office", "aliases": ["InfoSec"]},
+    {"id": "dept-general-manager", "name": "General Manager Office", "aliases": ["GM Office"]}
+  ],
+  "products": [
+    {"id": "product-a", "name": "Product A", "aliases": ["Model A Terminal", "Standard Inspection Terminal"]},
+    {"id": "product-b", "name": "Product B", "aliases": ["Model B Terminal", "Rugged Inspection Terminal"]}
+  ],
+  "accessories": [
+    {"id": "battery-a", "name": "Model A Original Battery", "aliases": ["Product A Original Battery"]},
+    {"id": "battery-b", "name": "Model B Original Battery", "aliases": ["Product B Original Battery"]},
+    {"id": "dock-standard", "name": "Standard Charging Dock", "aliases": ["Standard Dock"]},
+    {"id": "dock-industrial", "name": "Industrial Rugged Dock", "aliases": ["Industrial Dock"]}
+  ],
+  "regions": [
+    {"id": "region-east", "name": "East China", "aliases": ["East China Region"]},
+    {"id": "region-south", "name": "South China", "aliases": ["South China Region"]},
+    {"id": "region-north", "name": "North China", "aliases": ["North China Region"]},
+    {"id": "region-west", "name": "West China", "aliases": ["West China Region"]}
+  ],
+  "customer_levels": [
+    {"id": "customer-regular", "name": "Regular Customer", "aliases": ["Regular Level Customer"]},
+    {"id": "customer-key", "name": "Key Customer", "aliases": ["Key Level Customer"]},
+    {"id": "customer-strategic", "name": "Strategic Customer", "aliases": ["Strategic Level Customer"]}
+  ],
+  "suppliers": [
+    {"id": "supplier-xingyuan", "name": "Xingyuan Power Components Co., Ltd.", "aliases": ["Xingyuan Power"]},
+    {"id": "supplier-ruihe", "name": "Ruihe Precision Electronics Co., Ltd.", "aliases": ["Ruihe Precision"]},
+    {"id": "supplier-yuntong", "name": "Yuntong Supply Chain Services Co., Ltd.", "aliases": ["Yuntong Supply Chain"]}
+  ],
+  "document_categories": [
+    {"id": "customer_service_policy", "name": "Customer Service Policy", "aliases": []},
+    {"id": "sales_policy", "name": "Sales Policy", "aliases": []},
+    {"id": "inventory_policy", "name": "Inventory Policy", "aliases": []},
+    {"id": "procurement_policy", "name": "Procurement Policy", "aliases": []},
+    {"id": "finance_policy", "name": "Finance Policy", "aliases": []},
+    {"id": "hr_policy", "name": "HR Policy", "aliases": []},
+    {"id": "security_policy", "name": "Security Policy", "aliases": []},
+    {"id": "enterprise_profile_document", "name": "Enterprise Profile and Boundary Documentation", "aliases": []}
+  ],
+  "query_categories": [
+    {"id": "customer_service", "name": "Customer Service", "aliases": []},
+    {"id": "sales", "name": "Sales", "aliases": []},
+    {"id": "inventory", "name": "Inventory", "aliases": []},
+    {"id": "procurement", "name": "Procurement", "aliases": []},
+    {"id": "finance", "name": "Finance", "aliases": []},
+    {"id": "hr", "name": "Human Resources", "aliases": []},
+    {"id": "security_governance", "name": "Security Governance", "aliases": []},
+    {"id": "enterprise_profile", "name": "Enterprise Profile", "aliases": []}
+  ],
+  "query_types": [
+    {"id": "single_fact", "name": "Single Fact", "aliases": []},
+    {"id": "multi_constraint", "name": "Multi-Constraint", "aliases": []},
+    {"id": "cross_section", "name": "Cross-Section", "aliases": []},
+    {"id": "multi_evidence", "name": "Multi-Evidence", "aliases": []},
+    {"id": "unanswerable", "name": "Unanswerable", "aliases": []}
+  ]
+}
