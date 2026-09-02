@@ -146,13 +146,13 @@
       readiness.value.payload &&
       readiness.value.payload.status === "ready"
     ) {
-      setBadge(elements.readyBadge, elements.readyText, "ready", "Analytics Ready");
+      setBadge(elements.readyBadge, elements.readyText, "ready", "Runtime Ready");
     } else if (
       readiness.status === "fulfilled" &&
       readiness.value.payload &&
       readiness.value.payload.status === "not_ready"
     ) {
-      setBadge(elements.readyBadge, elements.readyText, "liveness", "Analytics Not Ready");
+      setBadge(elements.readyBadge, elements.readyText, "liveness", "Runtime Not Ready");
     } else {
       setBadge(elements.readyBadge, elements.readyText, "unavailable", "Readiness Unknown");
     }
@@ -388,7 +388,7 @@
       return {
         label: "Unsupported",
         tone: "neutral",
-        message: "The Agent currently does not support this type of request.",
+        message: "The Agent does not currently support this type of request.",
       };
     }
     return { label: "Execution Failed", tone: "failed", message: "Request execution failed." };
@@ -423,13 +423,13 @@
       return "Request validation failed. Please check your query and try again.";
     }
     if (statusCode === 503) {
-      return "Analytics service is not ready yet. Please try again later.";
+      return "The agent service is not ready yet. Please try again later.";
     }
     if (statusCode >= 500) {
       return "The service is temporarily unable to fulfill the request. Please try again later.";
     }
     if (payload && payload.code === "runtime_unavailable") {
-      return "Analytics service is not ready yet. Please try again later.";
+      return "The agent service is not ready yet. Please try again later.";
     }
     return `Request failed (HTTP ${statusCode}).`;
   }

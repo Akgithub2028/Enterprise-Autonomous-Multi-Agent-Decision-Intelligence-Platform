@@ -86,7 +86,11 @@ def test_demo_audit_path_is_forced_outside_repository(tmp_path: Path) -> None:
     repository = tmp_path / "repository"
     external = tmp_path / "external-audit"
     repository.mkdir()
-    settings = Settings(environment=Environment.TEST, _env_file=None)
+    settings = Settings(
+        app_name="Enterprise Decision Agent",
+        environment=Environment.TEST,
+        _env_file=None,
+    )
 
     prepared = prepare_demo_settings(
         settings,
@@ -103,7 +107,11 @@ def test_demo_audit_path_is_forced_outside_repository(tmp_path: Path) -> None:
 def test_demo_rejects_repository_local_audit_directory(tmp_path: Path) -> None:
     repository = tmp_path / "repository"
     repository.mkdir()
-    settings = Settings(environment=Environment.TEST, _env_file=None)
+    settings = Settings(
+        app_name="Enterprise Decision Agent",
+        environment=Environment.TEST,
+        _env_file=None,
+    )
 
     with pytest.raises(ValueError, match="outside"):
         prepare_demo_settings(
@@ -121,7 +129,11 @@ async def test_demo_missing_formal_configuration_fails_closed_before_external_io
     external = tmp_path / "audit"
     repository.mkdir()
     settings = prepare_demo_settings(
-        Settings(environment=Environment.DEVELOPMENT, _env_file=None),
+        Settings(
+            app_name="Enterprise Decision Agent",
+            environment=Environment.DEVELOPMENT,
+            _env_file=None,
+        ),
         repository_root=repository,
         audit_root=external,
     )

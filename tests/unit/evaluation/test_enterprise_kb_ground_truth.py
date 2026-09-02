@@ -319,10 +319,10 @@ def test_all_query_collision_sets_match_real_positive_chunk_overlaps(formal_buil
                 for clause_id in query.hard_negative_clause_ids
             )
 
-    assert formal_build.summary["overlapping_parent_query_count"] == 45
-    assert formal_build.summary["overlapping_child_query_count"] == 43
-    assert formal_build.summary["no_independent_hard_negative_parent_query_count"] == 28
-    assert formal_build.summary["no_independent_hard_negative_child_query_count"] == 14
+    assert formal_build.summary["overlapping_parent_query_count"] == 38
+    assert formal_build.summary["overlapping_child_query_count"] == 36
+    assert formal_build.summary["no_independent_hard_negative_parent_query_count"] == 4
+    assert formal_build.summary["no_independent_hard_negative_child_query_count"] == 0
 
 
 def test_all_query_blueprint_fields_and_order_are_preserved(formal_build) -> None:

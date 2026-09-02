@@ -86,7 +86,7 @@ async def test_configured_runtime_preflight_uses_only_the_opt_in_mcp_factory_and
     )
 
     result = await preflight_configured_runtime(
-        Settings(_env_file=None),
+        Settings(app_name="Enterprise Decision Agent", _env_file=None),
         bootstrap=fake_bootstrap,  # type: ignore[arg-type]
     )
 
@@ -132,6 +132,8 @@ def test_result_file_is_atomic_json_and_remains_available_for_parent_validation(
 def test_child_main_returns_immediately_after_writing_a_legal_result(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
+    monkeypatch.setenv("DECISION_AGENT_APP_NAME", "Enterprise Decision Agent")
+
     async def passed_preflight(_: Settings) -> RuntimePreflightResult:
         return _passed_result()
 

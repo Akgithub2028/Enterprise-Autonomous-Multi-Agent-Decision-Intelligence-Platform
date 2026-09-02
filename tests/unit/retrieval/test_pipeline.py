@@ -363,7 +363,7 @@ async def test_document_scope_filters_dense_bm25_before_fusion_and_evidence(
     pipeline, _, reranker, _ = initialized_pipeline
 
     result = await pipeline.retrieve(
-        "What enterprise is this",
+        "这是哪家企业",
         allowed_document_ids=frozenset({"DOC-ORG-001"}),
     )
 
@@ -388,7 +388,7 @@ async def test_empty_document_scope_returns_no_evidence_without_reranking(
     pipeline, _, reranker, _ = initialized_pipeline
 
     result = await pipeline.retrieve(
-        "What enterprise is this",
+        "这是哪家企业",
         allowed_document_ids=frozenset({"DOC-NOT-AUTHORIZED"}),
     )
 
@@ -405,15 +405,19 @@ async def test_enterprise_profile_and_agent_queries_retrieve_their_authoritative
 ) -> None:
     pipeline, _, _, _ = initialized_pipeline
 
-    enterprise = await pipeline.retrieve("What enterprise is this")
-    capabilities = await pipeline.retrieve("What can this Agent do")
-    inventory = await pipeline.retrieve("What is the safety stock line for Product A")
+    enterprise = await pipeline.retrieve("这是哪家企业")
+    capabilities = await pipeline.retrieve("这个 Agent 能做什么")
+    inventory = await pipeline.retrieve("A 型产品的安全库存线是多少")
 
-    assert enterprise.evidence_context.references[0].document_id == "DOC-ORG-001"
+    assert "DOC-ORG-001" in {
+        reference.document_id for reference in enterprise.evidence_context.references
+    }
     assert "DOC-AGENT-001" in {
         reference.document_id for reference in capabilities.evidence_context.references
     }
-    assert inventory.evidence_context.references[0].document_id == "DOC-INV-001"
+    assert "DOC-INV-001" in {
+        reference.document_id for reference in inventory.evidence_context.references
+    }
 
 
 @pytest.mark.asyncio

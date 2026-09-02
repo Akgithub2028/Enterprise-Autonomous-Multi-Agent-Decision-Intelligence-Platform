@@ -5,15 +5,15 @@
     {"id": "agent-enterprise-decision-assistant", "name": "Enterprise Agent", "aliases": ["Agent", "Decision Assistant", "Enterprise AI Assistant"]}
   ],
   "departments": [
-    {"id": "dept-customer-service", "name": "Customer Service Department", "aliases": ["Customer Service"]},
-    {"id": "dept-sales-operations", "name": "Sales Operations Department", "aliases": ["Sales Operations"]},
+    {"id": "dept-customer-service", "name": "Customer Service Department", "aliases": ["Customer Service Dept", "CS Department"]},
+    {"id": "dept-sales-operations", "name": "Sales Operations Department", "aliases": ["Sales Operations Dept"]},
     {"id": "dept-regional-sales", "name": "Regional Sales Center", "aliases": ["Regional Sales"]},
     {"id": "dept-supply-chain", "name": "Supply Chain Center", "aliases": ["Supply Chain"]},
-    {"id": "dept-procurement", "name": "Procurement Management Department", "aliases": ["Procurement"]},
-    {"id": "dept-warehouse", "name": "Warehouse Management Department", "aliases": ["Warehouse"]},
-    {"id": "dept-finance", "name": "Finance Management Department", "aliases": ["Finance"]},
-    {"id": "dept-hr", "name": "Human Resources Department", "aliases": ["HR"]},
-    {"id": "dept-security", "name": "Information Security Office", "aliases": ["InfoSec"]},
+    {"id": "dept-procurement", "name": "Procurement Management Department", "aliases": ["Procurement Dept"]},
+    {"id": "dept-warehouse", "name": "Warehouse Management Department", "aliases": ["Warehouse Dept"]},
+    {"id": "dept-finance", "name": "Finance Management Department", "aliases": ["Finance Dept"]},
+    {"id": "dept-hr", "name": "Human Resources Department", "aliases": ["HR Dept", "HR"]},
+    {"id": "dept-security", "name": "Information Security Office", "aliases": ["InfoSec Office", "InfoSec"]},
     {"id": "dept-general-manager", "name": "General Manager Office", "aliases": ["GM Office"]}
   ],
   "products": [

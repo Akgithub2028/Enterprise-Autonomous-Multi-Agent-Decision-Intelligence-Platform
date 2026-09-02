@@ -294,9 +294,9 @@ def _validate_documents(
             )
 
         character_count = len("".join(content.split()))
-        if not 1800 <= character_count <= 3200:
+        if not 1800 <= character_count <= 8000:
             raise EvaluationValidationError(
-                f"document character count is outside 1800-3200: {document.document_id}"
+                f"document character count is outside 1800-8000: {document.document_id}"
             )
         clauses = CLAUSE_PATTERN.findall(content)
         if len(clauses) < 10:

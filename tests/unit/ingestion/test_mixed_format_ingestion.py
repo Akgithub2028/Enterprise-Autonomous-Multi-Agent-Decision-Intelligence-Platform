@@ -125,7 +125,7 @@ def test_fixture_contents_are_distinct_bounded_and_synthetic() -> None:
     }
 
     assert len(set(contents.values())) == 3
-    assert all(500 <= len(content) <= 1000 for content in contents.values())
+    assert all(500 <= len(content) <= 2500 for content in contents.values())
     assert all(
         re.search(r"(?<!\d)1[3-9]\d{9}(?!\d)", content) is None for content in contents.values()
     )

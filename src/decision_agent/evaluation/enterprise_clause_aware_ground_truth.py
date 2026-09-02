@@ -161,7 +161,7 @@ def build_clause_aware_ground_truth(
 ) -> ClauseAwareGroundTruthBuild:
     """Build the Clause-aware variant in memory without touching fixed outputs."""
     root_path = Path(root).resolve()
-    chunker = ClauseAwareChunker(parent_chunk_size=800, child_chunk_size=300, chunk_overlap=50)
+    chunker = ClauseAwareChunker(parent_chunk_size=3000, child_chunk_size=1200, chunk_overlap=50)
     base = build_enterprise_kb_ground_truth(
         root_path,
         chunker=chunker,
@@ -169,8 +169,8 @@ def build_clause_aware_ground_truth(
         chunker_identity="decision_agent.ingestion.ClauseAwareChunker",
         chunker_config={
             "strategy_id": STRATEGY_ID,
-            "parent_max_chars": 800,
-            "child_max_chars": 300,
+            "parent_max_chars": 3000,
+            "child_max_chars": 1200,
             "child_overlap": 50,
         },
         stop_at_business_section=True,

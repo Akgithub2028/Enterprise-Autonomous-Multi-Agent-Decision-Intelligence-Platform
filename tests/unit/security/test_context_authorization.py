@@ -392,7 +392,12 @@ class _SecurityRequiredExecutor:
 
 def test_api_default_identity_adapter_fails_closed_without_calling_executor() -> None:
     app = create_app(
-        Settings(environment=Environment.TEST, required_dependencies=[], _env_file=None),
+        Settings(
+            app_name="Enterprise Decision Agent",
+            environment=Environment.TEST,
+            required_dependencies=[],
+            _env_file=None,
+        ),
         formal_request_executor=_SecurityRequiredExecutor(),  # type: ignore[arg-type]
     )
 
@@ -425,7 +430,12 @@ def test_api_rejects_self_asserted_identity_fields_before_resolver(
     identity_field: str,
 ) -> None:
     app = create_app(
-        Settings(environment=Environment.TEST, required_dependencies=[], _env_file=None),
+        Settings(
+            app_name="Enterprise Decision Agent",
+            environment=Environment.TEST,
+            required_dependencies=[],
+            _env_file=None,
+        ),
         formal_request_executor=_SecurityRequiredExecutor(),  # type: ignore[arg-type]
     )
 

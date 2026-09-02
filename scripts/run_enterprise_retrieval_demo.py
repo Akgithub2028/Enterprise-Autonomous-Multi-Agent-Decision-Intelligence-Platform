@@ -27,6 +27,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Enterprise knowledge query to retrieve",
     )
     parser.add_argument(
+        "--top-k",
+        type=int,
+        default=3,
+        help="Number of evidence items to display",
+    )
+    parser.add_argument(
         "--dataset-root",
         type=Path,
         default=ROOT / "datasets/enterprise_kb/m2c1",
